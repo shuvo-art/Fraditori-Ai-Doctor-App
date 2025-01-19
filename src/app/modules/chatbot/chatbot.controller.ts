@@ -122,7 +122,7 @@ export const handleChatMessage: RequestHandler = async (req, res) => {
     const agent = new TextAgent();
 
     // Generate a summary of the updated chat history
-    const summary = await agent.summarizeChatHistory(chatHistory._id.toString());
+    const summary = await agent.summarizeChatHistory(chatId);
 
     // Pass the summary as context to OpenAI
     const botResponse = await agent.getDoctorAssistResponse(userMessage, summary);

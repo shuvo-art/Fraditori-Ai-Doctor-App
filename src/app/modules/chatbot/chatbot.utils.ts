@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import dotenv from "dotenv";
+import docPromptItalian from "../../helpers/chatbot.helper";
 import { ChatHistory } from "./chatHistory.model";
 dotenv.config();
 
@@ -24,9 +25,8 @@ class TextAgent {
     }
 
     try {
-        const systemMessage = `Sei un dottore virtuale. Rispondi sempre in italiano. Assisti gli utenti con le loro domande mediche.${
-          context ? ` Ecco un riepilogo della conversazione finora: ${context}` : ""
-        }`;
+        const systemMessage = `${docPromptItalian}${context ? ` Ecco un riepilogo della conversazione finora: ${context}` : ""}`;
+
 
       const completion = await this.openai.chat.completions.create({
         model: "gpt-4",

@@ -16,7 +16,9 @@ const router = express.Router();
 router.post('/message', authenticate, handleChatMessage);
 router.get('/all-chats', authenticate, getAllChats);
 router.get('/history/:chatId', authenticate, getChatHistory);
-router.post("/doctor_assistant-aibot-reply", authenticate, handleGetBotReply);
+// router.post("/doctor_assistant-aibot-reply", authenticate, handleGetBotReply);
+router.post("/doctor-assistant-aibot-reply", authenticate, handleGetBotReply);
+
 
 // New routes
 router.put('/update-chat-name/:chatId', authenticate, updateChatName); // Update chat name

@@ -58,3 +58,23 @@ export const verifyOTP = (email: string, otp: string) => {
   }
   return false;
 };
+
+const refreshTokens: string[] = [];
+
+export const generateAccessToken = (user: IUser) => {
+  return jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
+};
+
+export const generateRefreshToken = (user: IUser) => {
+  const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET as string, { expiresIn: '7d' });
+  refreshTokens.push(refreshToken);
+  return refreshToken;
+};
+
+export const verifyRefreshToken = (token: string) => {
+  try {
+    return jwt.verify(token, process.env.REFRESH_TOKEN_SECRET as string);
+  } catch {
+    return null;
+  }
+};
